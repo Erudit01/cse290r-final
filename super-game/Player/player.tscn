@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://ccwh6hei6neor"]
+[gd_scene load_steps=2 format=3 uid="uid://ccwh6hei6neor"]
+
+[ext_resource type="Texture2D" uid="uid://b7lyseojw05rb" path="res://Player/Assets/Knight_2/Idle.png" id="1_gaqxj"]
 
 [node name="Player" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gaqxj")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
