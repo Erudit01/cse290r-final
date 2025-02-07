@@ -1,0 +1,18 @@
+[remap]
+
+importer="aseprite_wizard.plugin"
+type="SpriteFrames"
+uid="uid://cs834cpsbjxhn"
+valid=false
+
+[deps]
+
+source_file="res://dark_main/Assets/DARK - Tiny Hero - Bo Panda/Tiny Panda Good Version/Tiny Panda.aseprite"
+
+[params]
+
+split_layers=false
+exclude_layers_pattern=""
+only_visible_layers=false
+sheet_type="Packed"
+animation/round_fps=true

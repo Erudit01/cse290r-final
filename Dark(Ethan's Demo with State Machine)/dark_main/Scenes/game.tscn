@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://no0tsg0rh1ui"]
+
+[ext_resource type="PackedScene" uid="uid://djaydpitupy0v" path="res://dark_main/Scenes/panda.tscn" id="1_7s4p3"]
+[ext_resource type="PackedScene" uid="uid://b2wnd878c4wqt" path="res://dark_main/Scenes/delete_later.tscn" id="2_frpin"]
+
+[node name="game" type="Node2D"]
+
+[node name="panda" parent="." instance=ExtResource("1_7s4p3")]
+position = Vector2(10, -16)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(10, -16)
+zoom = Vector2(5, 5)
+
+[node name="CollisionShape2D" parent="." instance=ExtResource("2_frpin")]
+position = Vector2(16, 20)
