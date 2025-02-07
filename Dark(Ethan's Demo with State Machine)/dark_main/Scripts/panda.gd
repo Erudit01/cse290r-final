@@ -2,23 +2,23 @@ extends Node2D
 
 # What state the Player is in
 enum Player_State {
-	Attack,
-	Death,
-	Fall,
-	Idle,
-	Jab,
-	Jab_Repeat,
-	Jump,
-	Jump_W_Spin,
-	Roll,
-	Run,
+	Attack,         #DONE
+	Death,          #DONE
+	Fall,           #DONE
+	Idle,           #DONE
+	Jab,            #DONE
+	Jump,           #DONE
+	Jump_W_Spin,    #DONE
+	Roll,           #DONE
+	Run,            #DONE
 	Slam,
-	Spin_Jump
+	Spin_Jump       #NEEDS REPOSITIONING AND MOVING OF COLLIDER
 }
 
 #Movement Speed
 const SPEED = 120.0
 const JUMP_VELOCITY = -250.0
+const ROLL_VELOCITY = 200
 
 #reference what we need
 @onready 
@@ -38,6 +38,8 @@ var jump = false
 var double_jump = false
 var movable = true
 var roll = false
+var double_jump_ready = true
+var falling = false
 
 # Handles everything related to changing states
 func change_state(new_state: Player_State) -> void:
@@ -64,10 +66,7 @@ func change_state(new_state: Player_State) -> void:
 		Player_State.Jab:
 			animations.play('Jab')
 			movable = false
-		
-		Player_State.Jab_Repeat:
-			animations.play('Jab_Repeat')
-			movable = false
+			attacking = true
 		
 		Player_State.Jump:
 			animations.play('Jump')
@@ -78,12 +77,17 @@ func change_state(new_state: Player_State) -> void:
 			body.velocity.y = JUMP_VELOCITY
 			movable = true
 			double_jump = false
+			double_jump_ready = false
 		
 		Player_State.Run:
 			animations.play('Run')
 			movable = true
 		
 		Player_State.Roll:
+			if animations.flip_h == false:
+				body.velocity.x = ROLL_VELOCITY
+			elif animations.flip_h == true:
+				body.velocity.x = ROLL_VELOCITY * -1
 			animations.play('Roll')
 			movable = true
 			roll = true
@@ -94,7 +98,8 @@ func change_state(new_state: Player_State) -> void:
 		
 		Player_State.Spin_Jump:
 			animations.play('Spin_Jump')
-			movable = true
+			movable = false
+			attacking = true
 
 #Handles Movement
 func _physics_process(delta: float) -> void:
@@ -104,13 +109,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		jump = false
 		double_jump = false
+		double_jump_ready = true
+		falling = false
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and body.is_on_floor():
 		body.velocity.y = JUMP_VELOCITY
 		jump = true
 	
-	if Input.is_action_just_pressed("Jump") and jump == true and not body.is_on_floor():
+	if Input.is_action_just_pressed("Jump") and jump == true and not body.is_on_floor() and double_jump_ready == true:
 		body.velocity.y = JUMP_VELOCITY
 		double_jump = true
 	
@@ -132,6 +139,9 @@ func _physics_process(delta: float) -> void:
 	
 	#CHANGE THE STATES BELOW HERE
 	
+	if not body.is_on_floor() and body.velocity.y > 0:
+		falling = true
+	
 	#Change state based on movement
 	if direction == 0:
 		if attacking == false and death == false and jump == false and roll == false:
@@ -141,11 +151,19 @@ func _physics_process(delta: float) -> void:
 			new_state = Player_State.Run
 		
 	#Attack and Death and Jump
+	if Input.is_action_just_pressed("DEV-TOOL-DIE"):
+		new_state = Player_State.Death
 	if Input.is_action_just_pressed("Attack"):
 		new_state = Player_State.Attack
+	if Input.is_action_just_pressed("Jab"):
+		new_state = Player_State.Jab
+	if Input.is_action_just_pressed("Special_Attack"):
+		new_state = Player_State.Spin_Jump
 	if Input.is_action_just_pressed("Roll"):
 		new_state = Player_State.Roll
-	if jump == true:
+	if falling == true:
+		new_state = Player_State.Fall
+	if jump == true and falling == false:
 		new_state = Player_State.Jump
 	if double_jump == true:
 		new_state = Player_State.Jump_W_Spin
@@ -155,7 +173,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_animations_animation_finished() -> void:
-	if animations.animation == "Attack":
+	if animations.animation == "Attack" or animations.animation == "Jab" or animations.animation == "Spin_Jump":
 		attacking = false
 	if animations.animation == "Death":
 		death = false
