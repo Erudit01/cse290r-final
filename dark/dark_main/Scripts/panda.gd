@@ -8,7 +8,7 @@ enum Player_State {
 	Idle,           #DONE
 	Jab,            #DONE
 	Jump,           #DONE
-	Jump_W_Spin,    #DONE
+	Jump_W_Spin,    #CUT THE ANIMATION WE NEED PARTICLE EFFECTS INSTEAD ON DOUBLE JUMP
 	Roll,           #DONE
 	Run,            #NEEDS TO FIX GLITCH IN FLIP
 	Slam,           #DONE
@@ -18,7 +18,7 @@ enum Player_State {
 
 #Movement Speed
 const SPEED = 120.0
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -200.0
 const ROLL_VELOCITY = 400
 
 #reference what we need
@@ -75,7 +75,7 @@ func change_state(new_state: Player_State) -> void:
 			movable = true
 		
 		Player_State.Jump_W_Spin:
-			animations.play('Jump_W_Spin')
+			animations.play('Jump')
 			body.velocity.y = JUMP_VELOCITY
 			movable = true
 			double_jump = false
@@ -107,7 +107,7 @@ func change_state(new_state: Player_State) -> void:
 func _physics_process(delta: float) -> void:
 		# Add the gravity.
 	if not body.is_on_floor():
-		body.velocity.y += gravity * delta
+		body.velocity.y += gravity * delta/2
 		if Input.is_action_just_pressed("Special_Attack"):
 			slam_ready = true
 	else:

@@ -1,0 +1,15 @@
+Finish Panda Character Code
+
+Create a Menu that leads to game
+
+Create the Enemies
+- Red Panda
+- Panda Protector
+
+Create NPCs and Dialogue
+
+Create light mechanics
+
+Create first Level
+
+Create combat and moving hitboxes
