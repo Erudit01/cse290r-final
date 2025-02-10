@@ -42,6 +42,7 @@ var roll = false
 var double_jump_ready = true
 var falling = false
 var slam_ready = false
+var seen = false
 
 # Handles everything related to changing states
 func change_state(new_state: Player_State) -> void:
@@ -188,3 +189,7 @@ func _on_animations_animation_finished() -> void:
 	#GET RID OF THIS ONCE DEATH MECHANIC IS ACTIVE
 	if animations.animation == "Death":
 		death = false
+
+func _on_fov_entered(area: Area2D) -> void:
+	seen = true
+	

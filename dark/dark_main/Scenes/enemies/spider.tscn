@@ -1,11 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://csom6g4grlxg1"]
+[gd_scene load_steps=34 format=3 uid="uid://csom6g4grlxg1"]
 
 [ext_resource type="Script" path="res://dark_main/Scripts/spider.gd" id="1_bbgnt"]
+[ext_resource type="Texture2D" uid="uid://sec7fbbw06ws" path="res://dark_main/Assets/Characters/Blinding Spider/static idle.png" id="2_3ykw0"]
 [ext_resource type="Texture2D" uid="uid://ckk2x84g2lkwu" path="res://dark_main/Assets/Characters/Blinding Spider/prep blind attack 16x16.png" id="2_heq0l"]
 [ext_resource type="Texture2D" uid="uid://b3gyakb8wjbvj" path="res://dark_main/Assets/Characters/Blinding Spider/blind attack 16x16.png" id="3_17lt6"]
 [ext_resource type="Texture2D" uid="uid://diogoqthk6dkf" path="res://dark_main/Assets/Characters/Blinding Spider/deah 16x16.png" id="4_7woni"]
 [ext_resource type="Texture2D" uid="uid://dh3x7fkafjbhx" path="res://dark_main/Assets/Characters/Blinding Spider/damaged 16x16.png" id="5_6moma"]
-[ext_resource type="Texture2D" uid="uid://7er0ofswkevo" path="res://dark_main/Assets/Characters/Blinding Spider/walk 16x16.png" id="6_67jo6"]
+[ext_resource type="Texture2D" uid="uid://7er0ofswkevo" path="res://dark_main/Assets/Animated objects/Flower/walk 16x16.png" id="6_67jo6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c76w3"]
+atlas = ExtResource("2_3ykw0")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_flyjw"]
 atlas = ExtResource("2_heq0l")
@@ -34,6 +39,10 @@ region = Rect2(0, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4mste"]
 atlas = ExtResource("3_17lt6")
 region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4kps"]
+atlas = ExtResource("5_6moma")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_43pst"]
 atlas = ExtResource("4_7woni")
@@ -95,6 +104,14 @@ region = Rect2(0, 80, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_c76w3")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_flyjw")
 }, {
 "duration": 1.0,
@@ -120,6 +137,9 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4kps")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_43pst")
 }, {
@@ -177,8 +197,11 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mds48"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sg347"]
 radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asup4"]
+radius = 13.0384
 
 [node name="spider" type="Node2D"]
 script = ExtResource("1_bbgnt")
@@ -186,10 +209,16 @@ script = ExtResource("1_bbgnt")
 [node name="animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_h3hed")
-animation = &"walk"
-frame = 5
-frame_progress = 1.0
+animation = &"attack"
 
-[node name="collision" type="CollisionShape2D" parent="animations"]
-position = Vector2(-3, 4)
-shape = SubResource("CircleShape2D_mds48")
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="Hitboxcollision" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-1, -3)
+shape = SubResource("CircleShape2D_sg347")
+
+[node name="FOV" type="Area2D" parent="."]
+
+[node name="FOVcollision" type="CollisionShape2D" parent="FOV"]
+position = Vector2(-1, -3)
+shape = SubResource("CircleShape2D_asup4")
