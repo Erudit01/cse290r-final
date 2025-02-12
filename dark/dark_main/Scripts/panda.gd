@@ -13,7 +13,7 @@ enum Player_State {
 	Run,            #NEEDS TO FIX GLITCH IN FLIP
 	Slam,           #DONE
 	Spin_Jump,      #NEEDS REPOSITIONING AND MOVING OF COLLIDER
-	Wall_Slide
+	Wall_Slide      #NEEDS EVERYTHING NOTHING HAS BEEN DONE YET
 }
 
 #Movement Speed

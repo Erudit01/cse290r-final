@@ -209,7 +209,9 @@ script = ExtResource("1_bbgnt")
 [node name="animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_h3hed")
-animation = &"attack"
+animation = &"death"
+frame = 6
+frame_progress = 1.0
 
 [node name="HitBox" type="Area2D" parent="."]
 
