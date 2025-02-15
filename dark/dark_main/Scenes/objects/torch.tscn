@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://k7wbmi5mpmob"]
+[gd_scene load_steps=12 format=3 uid="uid://k7wbmi5mpmob"]
 
 [ext_resource type="Texture2D" uid="uid://cl4lbmosj46iu" path="res://dark_main/Assets/Animated objects/Torch/Torch 16x16.png" id="1_mbldd"]
+[ext_resource type="Script" path="res://dark_main/Scenes/objects/torch_light_flicker.gd" id="2_pofs7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nyx53"]
 atlas = ExtResource("1_mbldd")
@@ -52,7 +53,25 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_7ouv5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1a7aw"]
+gradient = SubResource("Gradient_7ouv5")
+width = 105
+height = 105
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="torch" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_1na7b")
 autoplay = "default"
 frame_progress = 0.782763
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.501961, 0, 0.501961, 1)
+energy = 2.0
+blend_mode = 2
+texture = SubResource("GradientTexture2D_1a7aw")
+script = ExtResource("2_pofs7")

@@ -592,3 +592,6 @@ position = Vector2(-259, 415)
 [node name="FlattenImage1" type="Sprite2D" parent="."]
 position = Vector2(466, 390)
 texture = ExtResource("8_2pmi7")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.0196078, 0.0196078, 0.0196078, 1)
