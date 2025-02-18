@@ -119,16 +119,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bcvac")
 }, {
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_hj337")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_nr0xc")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_xt3k6")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_cm8ae")
 }, {
 "duration": 1.0,
@@ -242,17 +242,17 @@ shape = SubResource("CircleShape2D_asup4")
 [node name="BlindingHitBox" type="Area2D" parent="."]
 script = ExtResource("9_11p26")
 
-[node name="LightCollision1" type="CollisionShape2D" parent="BlindingHitBox"]
+[node name="LightCollision_1" type="CollisionShape2D" parent="BlindingHitBox"]
 visible = false
 position = Vector2(3, -11)
 shape = SubResource("CircleShape2D_yriie")
 
-[node name="LightCollision2" type="CollisionShape2D" parent="BlindingHitBox"]
+[node name="LightCollision_2" type="CollisionShape2D" parent="BlindingHitBox"]
 visible = false
 position = Vector2(1.5, -11.5)
 shape = SubResource("CircleShape2D_qneom")
 
-[node name="LightCollision3" type="CollisionShape2D" parent="BlindingHitBox"]
+[node name="LightCollision_3" type="CollisionShape2D" parent="BlindingHitBox"]
 visible = false
 position = Vector2(1.5, -11.5)
 shape = SubResource("CircleShape2D_0w6x0")

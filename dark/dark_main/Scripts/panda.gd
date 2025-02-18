@@ -20,6 +20,7 @@ enum Player_State {
 const SPEED = 120.0
 const JUMP_VELOCITY = -200.0
 const ROLL_VELOCITY = 400
+const FULL_HEALTH = 100
 
 #reference what we need
 @onready 
@@ -43,6 +44,7 @@ var double_jump_ready = true
 var falling = false
 var slam_ready = false
 var seen = false
+var health = FULL_HEALTH
 
 # Handles everything related to changing states
 func change_state(new_state: Player_State) -> void:
@@ -190,6 +192,5 @@ func _on_animations_animation_finished() -> void:
 	if animations.animation == "Death":
 		death = false
 
-func _on_fov_entered(area: Area2D) -> void:
-	seen = true
-	
+func take_damage(damage: int):
+	health -= damage

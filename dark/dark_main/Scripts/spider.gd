@@ -11,6 +11,7 @@ enum Spider_State {
 
 #Movement Speed
 const SPEED = 80.0
+const FULL_HEALTH = 50
 
 @onready 
 var animations: AnimatedSprite2D = $animations
@@ -18,6 +19,7 @@ var current_state: Spider_State = Spider_State.Idle
 var movable = true
 var attacking = false
 var death = false
+var health = FULL_HEALTH
 
 func change_state(new_state: Spider_State) -> void:
 	current_state = new_state
@@ -42,3 +44,6 @@ func change_state(new_state: Spider_State) -> void:
 			animations.play('death')
 			death = true
 			movable = false
+			
+func take_damage(damage: int):
+	health -= damage
