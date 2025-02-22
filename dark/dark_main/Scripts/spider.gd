@@ -20,6 +20,7 @@ var movable = true
 var attacking = false
 var death = false
 var health = FULL_HEALTH
+var damage = 0
 
 func change_state(new_state: Spider_State) -> void:
 	current_state = new_state
@@ -45,5 +46,19 @@ func change_state(new_state: Spider_State) -> void:
 			death = true
 			movable = false
 			
-func take_damage(damage: int):
-	health -= damage
+func take_damage(dmg: int):
+	health -= dmg
+	print(health)
+
+func _on_spider_hurt_box_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	print(5)
+	if area.name == "JabHitBox":
+		damage = 30
+	elif area.name == "AttackHitBox":
+		damage = 40
+	elif area.name == "SlamHitBox":
+		damage = 25
+	else:
+		return
+	
+	take_damage(damage)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://do84y41ay25pw"]
+[gd_scene load_steps=117 format=3 uid="uid://do84y41ay25pw"]
 
 [ext_resource type="Texture2D" uid="uid://b78bl664k78sg" path="res://dark_main/Assets/Characters/Panda/Tiny Panda Good Version/Tiny Panda-Idle.png" id="1_1ub6j"]
 [ext_resource type="Script" path="res://dark_main/Scripts/panda.gd" id="1_ajng7"]
@@ -14,8 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://3lmw3af3a6cc" path="res://dark_main/Assets/Characters/Panda/Tiny Panda Good Version/Tiny Panda-Heli Slam.png" id="12_61l4w"]
 [ext_resource type="Texture2D" uid="uid://dfa35rn5qophu" path="res://dark_main/Assets/Characters/Panda/Tiny Panda Good Version/Tiny Panda-Jump Spin.png" id="13_txtuv"]
 [ext_resource type="Texture2D" uid="uid://rijmnm406ppj" path="res://dark_main/Assets/Characters/Panda/Tiny Panda Good Version/Tiny Panda-Wall Slide.png" id="14_amouo"]
-[ext_resource type="Script" path="res://dark_main/Scripts/MyHitBox.gd" id="15_nn2te"]
-[ext_resource type="Script" path="res://dark_main/Scripts/MyHurtBox.gd" id="16_vy4b4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqywj"]
 atlas = ExtResource("1_ocmhu")
@@ -738,8 +736,9 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bb1mj"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ieitk"]
 radius = 5.0
+height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_thkvc"]
 radius = 44.0
@@ -764,71 +763,66 @@ height = 16.0407
 radius = 21.0
 
 [node name="panda" type="CharacterBody2D"]
+collision_mask = 8
 script = ExtResource("1_ajng7")
 
 [node name="animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(6, -12)
 sprite_frames = SubResource("SpriteFrames_buldp")
-animation = &"Attack"
-frame = 9
-frame_progress = 1.0
+animation = &"Idle"
 
 [node name="collision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, -6)
-shape = SubResource("CircleShape2D_bb1mj")
+position = Vector2(-2, -7)
+shape = SubResource("CapsuleShape2D_ieitk")
 
 [node name="FOV" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FOV"]
-visible = false
 position = Vector2(-2, -6)
 shape = SubResource("CircleShape2D_thkvc")
 
 [node name="JabHitBox" type="Area2D" parent="."]
-script = ExtResource("15_nn2te")
+collision_layer = 2
+collision_mask = 4
 
 [node name="Collision1" type="CollisionShape2D" parent="JabHitBox"]
-visible = false
 position = Vector2(35, -8)
 rotation = 1.48877
 shape = SubResource("CapsuleShape2D_ylikj")
 
 [node name="Collision2" type="CollisionShape2D" parent="JabHitBox"]
-visible = false
 position = Vector2(35, -3)
 rotation = -1.53788
 shape = SubResource("CapsuleShape2D_fnlyt")
 
 [node name="PlayerHurtBox" type="Area2D" parent="."]
-visible = false
-script = ExtResource("16_vy4b4")
+collision_mask = 4
 
 [node name="PlayerHitBox" type="CollisionShape2D" parent="PlayerHurtBox"]
-visible = false
 position = Vector2(-2, -7)
 shape = SubResource("CapsuleShape2D_ylnq6")
 
 [node name="AttackHitBox" type="Area2D" parent="."]
-script = ExtResource("15_nn2te")
+collision_layer = 2
+collision_mask = 4
 
 [node name="Collision1" type="CollisionShape2D" parent="AttackHitBox"]
-visible = false
 position = Vector2(22, -7)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_87phv")
 
 [node name="Collision2" type="CollisionShape2D" parent="AttackHitBox"]
-visible = false
 position = Vector2(28, -3)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_87phv")
 
 [node name="SlamHitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="Collision" type="CollisionShape2D" parent="SlamHitBox"]
-visible = false
-position = Vector2(1.5, -4)
+position = Vector2(1, -4)
 shape = SubResource("CircleShape2D_3n1ac")
 
 [connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished"]

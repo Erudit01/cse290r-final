@@ -194,3 +194,4 @@ func _on_animations_animation_finished() -> void:
 
 func take_damage(damage: int):
 	health -= damage
+	print(health)
