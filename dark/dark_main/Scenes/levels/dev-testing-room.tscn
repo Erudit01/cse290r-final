@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://no0tsg0rh1ui"]
+[gd_scene load_steps=13 format=3 uid="uid://no0tsg0rh1ui"]
 
 [ext_resource type="Texture2D" uid="uid://ck3e6fuwwvpo3" path="res://dark_main/Assets/Tileset/DARK Edition Tileset No background.png" id="2_y3fef"]
 [ext_resource type="PackedScene" uid="uid://k7wbmi5mpmob" path="res://dark_main/Scenes/objects/torch.tscn" id="3_lptoo"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://csom6g4grlxg1" path="res://dark_main/Scenes/enemies/spider.tscn" id="6_8a5qm"]
 [ext_resource type="Texture2D" uid="uid://cg0mt1mlja1b4" path="res://dark_main/Assets/Tileset/The Hanger/Background/Flatten Image1.png" id="8_2pmi7"]
 [ext_resource type="PackedScene" uid="uid://do84y41ay25pw" path="res://dark_main/Scenes/panda.tscn" id="8_n5glv"]
+[ext_resource type="PackedScene" uid="uid://bechm50rn420k" path="res://dark_main/Scenes/Menus/pause_menu.tscn" id="9_n6cm6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jlq1w"]
 texture = ExtResource("2_y3fef")
@@ -588,5 +589,12 @@ color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 position = Vector2(8, 388)
 
 [node name="Camera2D" type="Camera2D" parent="panda"]
-position = Vector2(1, -10)
+position = Vector2(0, -30)
 zoom = Vector2(5, 5)
+
+[node name="pause_menu" parent="panda/Camera2D" instance=ExtResource("9_n6cm6")]
+visible = false
+offset_left = -36.0
+offset_top = -57.0
+offset_right = -36.0
+offset_bottom = -57.0
