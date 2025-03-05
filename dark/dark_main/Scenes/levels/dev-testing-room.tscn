@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d0k8ju0yp68vm" path="res://dark_main/Assets/Tileset/The Columns/Flatten Vertical.png" id="6_2x5ao"]
 [ext_resource type="PackedScene" uid="uid://csom6g4grlxg1" path="res://dark_main/Scenes/enemies/spider.tscn" id="6_8a5qm"]
 [ext_resource type="Texture2D" uid="uid://cg0mt1mlja1b4" path="res://dark_main/Assets/Tileset/The Hanger/Background/Flatten Image1.png" id="8_2pmi7"]
-[ext_resource type="PackedScene" uid="uid://do84y41ay25pw" path="res://dark_main/Scenes/panda.tscn" id="8_n5glv"]
+[ext_resource type="PackedScene" uid="uid://djaydpitupy0v" path="res://dark_main/Scenes/player/panda.tscn" id="8_n5glv"]
 [ext_resource type="PackedScene" uid="uid://bechm50rn420k" path="res://dark_main/Scenes/Menus/pause_menu.tscn" id="9_n6cm6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jlq1w"]

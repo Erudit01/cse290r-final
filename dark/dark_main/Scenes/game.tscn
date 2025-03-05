@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://43cw3edq1kp2"]
 
-[ext_resource type="PackedScene" uid="uid://do84y41ay25pw" path="res://dark_main/Scenes/panda.tscn" id="1_7s4p3"]
+[ext_resource type="PackedScene" uid="uid://djaydpitupy0v" path="res://dark_main/Scenes/player/panda.tscn" id="1_7s4p3"]
 [ext_resource type="Texture2D" uid="uid://ck3e6fuwwvpo3" path="res://dark_main/Assets/Tileset/DARK Edition Tileset No background.png" id="3_ehxas"]
 [ext_resource type="Texture2D" uid="uid://btm5bmfl7v7jv" path="res://dark_main/Assets/Tileset/MP Interior Tileset.png" id="3_i3hdf"]
 
