@@ -425,6 +425,7 @@ disabled = true
 collision_mask = 12
 
 [node name="AttackHitBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 4
 

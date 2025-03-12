@@ -4,13 +4,13 @@ extends Node2D
 enum Player_State {
 	Attack,         #DONE
 	Death,          #DONE
-	Fall,           #DONE
+	Fall,           #AFTER JUMPING TO EXIT ATTACK LOOPS INFINITELY
 	Idle,           #DONE
-	Jab,            #DONE
+	Jab,            #LOOPS INFINITELY
 	Jump,           #DONE
 	Jump_W_Spin,    #CUT THE ANIMATION WE NEED PARTICLE EFFECTS INSTEAD ON DOUBLE JUMP
 	Roll,           #DONE
-	Run,            #NEEDS TO FIX GLITCH IN FLIP
+	Run,            #DONE
 	Slam,           #DONE
 	Spin_Jump,      #NEEDS REPOSITIONING AND MOVING OF COLLIDER
 	Wall_Slide      #NEEDS EVERYTHING NOTHING HAS BEEN DONE YET
@@ -26,7 +26,7 @@ const FULL_HEALTH = 100
 @onready 
 var body: CharacterBody2D = $"."
 @onready 
-var animations: AnimatedSprite2D = $animations
+var animate: AnimationPlayer = $Animations/AnimationPlayer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -51,58 +51,58 @@ func change_state(new_state: Player_State) -> void:
 	current_state = new_state
 	match current_state:
 		Player_State.Attack:
-			animations.play('Attack')
+			animate.play('name')
 			movable = false
 			attacking = true
 			
 		Player_State.Death:
-			animations.play('Death')
+			animate.play('Death')
 			death = true
 			movable = false
 		
 		Player_State.Fall:
-			animations.play('Fall')
+			animate.play('Fall')
 			movable = true
 		
 		Player_State.Idle:
-			animations.play('Idle')
+			animate.play('Idle')
 			movable = true
 		
 		Player_State.Jab:
-			animations.play('Jab')
+			animate.play('Jab')
 			movable = false
 			attacking = true
 		
 		Player_State.Jump:
-			animations.play('Jump')
+			animate.play('Jump')
 			movable = true
 		
 		Player_State.Jump_W_Spin:
-			animations.play('Jump')
+			animate.play('Jump')
 			body.velocity.y = JUMP_VELOCITY
 			movable = true
 			double_jump = false
 			double_jump_ready = false
 		
 		Player_State.Run:
-			animations.play('Run')
+			animate.play('Run')
 			movable = true
 		
 		Player_State.Roll:
-			if animations.flip_h == false:
+			if $Animations.flip_h == false:
 				body.velocity.x = ROLL_VELOCITY
-			elif animations.flip_h == true:
+			elif $Animations.flip_h == true:
 				body.velocity.x = ROLL_VELOCITY * -1
-			animations.play('Roll')
+			animate.play('Roll')
 			movable = true
 			roll = true
 		
 		Player_State.Slam:
-			animations.play('Slam')
+			animate.play('Slam')
 			movable = false
 		
 		Player_State.Spin_Jump:
-			animations.play('Spin_Jump')
+			animate.play('Spin_Jump')
 			movable = false
 			attacking = true
 
@@ -131,11 +131,27 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction: -1, 0, 1
 	var direction = Input.get_axis("Left", "Right")
 
-	# Flip the Sprite
+	# Flip the Sprite/Hitboxes
 	if direction > 0 and movable == true:
-		animations.flip_h = false
+		if $Animations.flip_h == true:
+			$JabHitBox/JabCollision1.position *= Vector2(-1,1)
+			$JabHitBox/JabCollision1.rotation *= -1
+			$JabHitBox/JabCollision2.position *= Vector2(-1,1)
+			$JabHitBox/JabCollision2.rotation *= -1
+			$AttackHitBox/AttackCollision1.position *= Vector2(-1,1)
+			$AttackHitBox/AttackCollision2.position *= Vector2(-1,1)
+			$PlayerHitBox.position *= Vector2(-1,1)
+		$Animations.flip_h = false
 	elif direction < 0 and movable == true:
-		animations.flip_h = true
+		if $Animations.flip_h == false:
+			$JabHitBox/JabCollision1.position *= Vector2(-1,1)
+			$JabHitBox/JabCollision1.rotation *= -1
+			$JabHitBox/JabCollision2.position *= Vector2(-1,1)
+			$JabHitBox/JabCollision2.rotation *= -1
+			$AttackHitBox/AttackCollision1.position *= Vector2(-1,1)
+			$AttackHitBox/AttackCollision2.position *= Vector2(-1,1)
+			$PlayerHitBox.position *= Vector2(-1,1)
+		$Animations.flip_h = true
 	
 		#Apply movement
 	if direction and movable == true:
@@ -184,12 +200,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_animations_animation_finished() -> void:
-	if animations.animation == "Attack" or animations.animation == "Jab" or animations.animation == "Spin_Jump" or animations.animation == "Slam":
+	if animate.animation == "Attack" or animate.animation == "Jab" or animate.animation == "Spin_Jump" or animate.animation == "Slam":
 		attacking = false
-	if animations.animation == "Roll":
+	if animate.animation == "Roll":
 		roll = false
 	#GET RID OF THIS ONCE DEATH MECHANIC IS ACTIVE
-	if animations.animation == "Death":
+	if animate.animation == "Death":
 		death = false
 
 func take_damage(damage: int):
