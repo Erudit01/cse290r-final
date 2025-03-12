@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://djaydpitupy0v"]
+[gd_scene load_steps=23 format=3 uid="uid://djaydpitupy0v"]
 
 [ext_resource type="Script" path="res://dark_main/Scripts/panda.gd" id="1_ajng7"]
 [ext_resource type="Texture2D" uid="uid://b5lw56tuhvwfp" path="res://dark_main/Assets/Characters/Panda/Tiny Panda Good Version/Tiny Panda Good Version 103x33.png" id="15_jvyyr"]
@@ -73,7 +73,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("JabHitBox/Collision1:disabled")
+tracks/1/path = NodePath("JabHitBox/JabCollision1:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -85,7 +85,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("JabHitBox/Collision2:disabled")
+tracks/2/path = NodePath("JabHitBox/JabCollision2:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -129,7 +129,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("JabHitBox/Collision1:disabled")
+tracks/1/path = NodePath("JabHitBox/JabCollision1:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -141,7 +141,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("JabHitBox/Collision2:disabled")
+tracks/2/path = NodePath("JabHitBox/JabCollision2:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -153,7 +153,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SlamHitBox/Collision:disabled")
+tracks/3/path = NodePath("SlamHitBox/SlamCollision:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -165,7 +165,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackHitBox/Collision1:disabled")
+tracks/4/path = NodePath("AttackHitBox/AttackCollision1:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -177,7 +177,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AttackHitBox/Collision2:disabled")
+tracks/5/path = NodePath("AttackHitBox/AttackCollision2:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -240,7 +240,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SlamHitBox/Collision:disabled")
+tracks/1/path = NodePath("SlamHitBox/SlamCollision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -303,7 +303,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackHitBox/Collision1:disabled")
+tracks/1/path = NodePath("AttackHitBox/AttackCollision1:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -315,7 +315,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackHitBox/Collision2:disabled")
+tracks/2/path = NodePath("AttackHitBox/AttackCollision2:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -359,10 +359,6 @@ _data = {
 "Wall_Slide": SubResource("Animation_u0oqw")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ieitk"]
-radius = 5.0
-height = 16.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_thkvc"]
 radius = 44.0
 
@@ -383,14 +379,14 @@ radius = 3.01022
 height = 16.0407
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3n1ac"]
-radius = 21.0
+radius = 20.0
 
 [node name="panda" type="CharacterBody2D"]
 collision_mask = 8
 script = ExtResource("1_ajng7")
 
 [node name="Animations" type="Sprite2D" parent="."]
-position = Vector2(6, -13)
+position = Vector2(0, -13)
 scale = Vector2(0.92, 1)
 texture = ExtResource("15_jvyyr")
 hframes = 17
@@ -401,11 +397,6 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_gbj8h")
 }
-
-[node name="collision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-2, -7)
-shape = SubResource("CapsuleShape2D_ieitk")
 
 [node name="FOV" type="Area2D" parent="."]
 visible = false
@@ -419,24 +410,23 @@ visible = false
 collision_layer = 2
 collision_mask = 4
 
-[node name="Collision1" type="CollisionShape2D" parent="JabHitBox"]
-position = Vector2(35, -8)
+[node name="JabCollision1" type="CollisionShape2D" parent="JabHitBox"]
+position = Vector2(30, -9)
 rotation = 1.48877
 shape = SubResource("CapsuleShape2D_ylikj")
 disabled = true
 
-[node name="Collision2" type="CollisionShape2D" parent="JabHitBox"]
-position = Vector2(35, -3)
+[node name="JabCollision2" type="CollisionShape2D" parent="JabHitBox"]
+position = Vector2(30, -3)
 rotation = -1.53788
 shape = SubResource("CapsuleShape2D_fnlyt")
 disabled = true
 
 [node name="PlayerHurtBox" type="Area2D" parent="."]
-visible = false
 collision_mask = 4
 
 [node name="PlayerHitBox" type="CollisionShape2D" parent="PlayerHurtBox"]
-position = Vector2(-2, -8)
+position = Vector2(-9, -8)
 shape = SubResource("CapsuleShape2D_ylnq6")
 
 [node name="AttackHitBox" type="Area2D" parent="."]
@@ -444,14 +434,14 @@ visible = false
 collision_layer = 2
 collision_mask = 4
 
-[node name="Collision1" type="CollisionShape2D" parent="AttackHitBox"]
-position = Vector2(22, -7)
+[node name="AttackCollision1" type="CollisionShape2D" parent="AttackHitBox"]
+position = Vector2(14, -7)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_87phv")
 disabled = true
 
-[node name="Collision2" type="CollisionShape2D" parent="AttackHitBox"]
-position = Vector2(28, -3)
+[node name="AttackCollision2" type="CollisionShape2D" parent="AttackHitBox"]
+position = Vector2(19, -3)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_87phv")
 disabled = true
@@ -461,8 +451,8 @@ visible = false
 collision_layer = 2
 collision_mask = 4
 
-[node name="Collision" type="CollisionShape2D" parent="SlamHitBox"]
-position = Vector2(-2, -7)
+[node name="SlamCollision" type="CollisionShape2D" parent="SlamHitBox"]
+position = Vector2(-4, -6)
 shape = SubResource("CircleShape2D_3n1ac")
 disabled = true
 
