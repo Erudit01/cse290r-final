@@ -51,7 +51,7 @@ func change_state(new_state: Player_State) -> void:
 	current_state = new_state
 	match current_state:
 		Player_State.Attack:
-			animate.play('name')
+			animate.play('Attack')
 			movable = false
 			attacking = true
 			
@@ -194,20 +194,27 @@ func _physics_process(delta: float) -> void:
 		attacking = true
 		slam_ready = false
 		new_state = Player_State.Slam
+		
+	if health <= 0:
+		death = true
 	
 	body.move_and_slide()
 	change_state(new_state)
+	
 
-
-func _on_animations_animation_finished() -> void:
-	if animate.animation == "Attack" or animate.animation == "Jab" or animate.animation == "Spin_Jump" or animate.animation == "Slam":
-		attacking = false
-	if animate.animation == "Roll":
-		roll = false
-	#GET RID OF THIS ONCE DEATH MECHANIC IS ACTIVE
-	if animate.animation == "Death":
-		death = false
 
 func take_damage(damage: int):
 	health -= damage
 	print(health)
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Attack" or anim_name == "Jab" or anim_name == "Spin_Jump" or anim_name == "Slam":
+		attacking = false
+	if anim_name == "Roll":
+		roll = false
+	#GET RID OF THIS ONCE DEATH MECHANIC IS ACTIVE
+	if anim_name == "Death":
+		death = false
+		
+	print(anim_name)

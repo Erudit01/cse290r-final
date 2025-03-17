@@ -222,11 +222,11 @@ animation = &"attack"
 frame = 6
 frame_progress = 1.0
 
-[node name="SpiderHurtBox" type="Area2D" parent="."]
+[node name="EnemyHitBox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 2
 
-[node name="Hitboxcollision" type="CollisionShape2D" parent="SpiderHurtBox"]
+[node name="Hitboxcollision" type="CollisionShape2D" parent="EnemyHitBox"]
 position = Vector2(-2, -3)
 shape = SubResource("CircleShape2D_sg347")
 
@@ -254,4 +254,4 @@ visible = false
 position = Vector2(1.5, -11.5)
 shape = SubResource("CircleShape2D_0w6x0")
 
-[connection signal="area_shape_entered" from="SpiderHurtBox" to="." method="_on_spider_hurt_box_area_shape_entered"]
+[connection signal="area_shape_entered" from="EnemyHitBox" to="." method="_on_spider_hurt_box_area_shape_entered"]
