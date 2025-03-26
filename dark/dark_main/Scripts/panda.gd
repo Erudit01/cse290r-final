@@ -4,12 +4,12 @@ extends Node2D
 enum Player_State {
 	Attack,         #DONE
 	Death,          #DONE
-	Fall,           #AFTER JUMPING TO EXIT ATTACK LOOPS INFINITELY
+	Fall,           #DONE
 	Idle,           #DONE
-	Jab,            #LOOPS INFINITELY
+	Jab,            #DONE
 	Jump,           #DONE
 	Jump_W_Spin,    #CUT THE ANIMATION WE NEED PARTICLE EFFECTS INSTEAD ON DOUBLE JUMP
-	Roll,           #DONE
+	Roll,           #ONLY WORKS GOING TO THE RIGHT
 	Run,            #DONE
 	Slam,           #DONE
 	Spin_Jump,      #NEEDS REPOSITIONING AND MOVING OF COLLIDER
@@ -216,5 +216,3 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	#GET RID OF THIS ONCE DEATH MECHANIC IS ACTIVE
 	if anim_name == "Death":
 		death = false
-		
-	print(anim_name)
