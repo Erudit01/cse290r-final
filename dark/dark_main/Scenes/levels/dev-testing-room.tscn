@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ct0v6d60whel8" path="res://dark_main/Scenes/objects/flower.tscn" id="4_rsvih"]
 [ext_resource type="PackedScene" uid="uid://dcuxx7gj408sp" path="res://dark_main/Scenes/objects/portal.tscn" id="5_k5v1i"]
 [ext_resource type="Texture2D" uid="uid://d0k8ju0yp68vm" path="res://dark_main/Assets/Tileset/The Columns/Flatten Vertical.png" id="6_2x5ao"]
-[ext_resource type="PackedScene" uid="uid://cpy8bjc0i8a8n" path="res://dark_main/Scenes/enemies/spider.tscn" id="6_8a5qm"]
+[ext_resource type="PackedScene" uid="uid://csom6g4grlxg1" path="res://dark_main/Scenes/enemies/spider.tscn" id="6_8a5qm"]
 [ext_resource type="Texture2D" uid="uid://cg0mt1mlja1b4" path="res://dark_main/Assets/Tileset/The Hanger/Background/Flatten Image1.png" id="8_2pmi7"]
 [ext_resource type="PackedScene" uid="uid://djaydpitupy0v" path="res://dark_main/Scenes/player/panda.tscn" id="8_n5glv"]
 [ext_resource type="PackedScene" uid="uid://bechm50rn420k" path="res://dark_main/Scenes/Menus/pause_menu.tscn" id="9_n6cm6"]
