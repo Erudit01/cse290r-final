@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://no0tsg0rh1ui"]
+[gd_scene load_steps=13 format=3 uid="uid://no0tsg0rh1ui"]
 
-[ext_resource type="Script" path="res://dark_main/Scripts/Menus/pause_menu_show.gd" id="1_oxr7u"]
 [ext_resource type="Texture2D" uid="uid://ck3e6fuwwvpo3" path="res://dark_main/Assets/Tileset/DARK Edition Tileset No background.png" id="2_y3fef"]
 [ext_resource type="PackedScene" uid="uid://k7wbmi5mpmob" path="res://dark_main/Scenes/objects/torch.tscn" id="3_lptoo"]
 [ext_resource type="PackedScene" uid="uid://ct0v6d60whel8" path="res://dark_main/Scenes/objects/flower.tscn" id="4_rsvih"]
@@ -532,7 +531,6 @@ sources/0 = SubResource("TileSetAtlasSource_jlq1w")
 sources/2 = SubResource("TileSetAtlasSource_p1p8p")
 
 [node name="dev-tetsing-room" type="Node2D"]
-script = ExtResource("1_oxr7u")
 
 [node name="objects" type="Node" parent="."]
 
@@ -583,6 +581,9 @@ layer_1/tile_data = PackedInt32Array(-65539, 327680, 13, -3, 327680, 14, 65533, 
 layer_2/name = "Forefront"
 layer_2/z_index = 5
 
+[node name="spider" parent="." instance=ExtResource("6_8a5qm")]
+position = Vector2(54, 413)
+
 [node name="FlattenImage1" type="Sprite2D" parent="."]
 position = Vector2(466, 390)
 texture = ExtResource("8_2pmi7")
@@ -603,8 +604,3 @@ offset_left = -36.0
 offset_top = -57.0
 offset_right = -36.0
 offset_bottom = -57.0
-
-[node name="spider" parent="." instance=ExtResource("6_8a5qm")]
-position = Vector2(160, 407)
-collision_layer = 3
-collision_mask = 3

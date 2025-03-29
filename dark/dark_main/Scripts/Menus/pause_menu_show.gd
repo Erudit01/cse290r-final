@@ -2,8 +2,7 @@ extends Node2D
 
 #@onready var pause_menu: Control = $panda/Camera2D/pause_menu
 var paused = false
-@onready var pause_menu: Control = $panda/Camera2D/pause_menu
-
+@onready var pause_menu: Control = $Camera2D/pause_menu
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
