@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs1gdqmanlg7k"]
+[gd_scene load_steps=4 format=3 uid="uid://bs1gdqmanlg7k"]
 
 [ext_resource type="Script" path="res://dark_main/Scripts/Menus/main_menu.gd" id="1_jvsjl"]
+[ext_resource type="Texture2D" uid="uid://38hpk5aln8lu" path="res://dark_main/Assets/menus/UI - Words5.png" id="2_0rrqs"]
+[ext_resource type="Texture2D" uid="uid://p1i6kfwjxgnx" path="res://dark_main/Assets/menus/UI - Words3.png" id="3_uldii"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -21,12 +23,12 @@ layout_mode = 2
 
 [node name="start" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Start"
+icon = ExtResource("2_0rrqs")
 flat = true
 
 [node name="quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+icon = ExtResource("3_uldii")
 flat = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
