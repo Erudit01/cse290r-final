@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
 const SPEED = 60
+const FULL_HEALTH = 50
 
 enum Spider_State {
 	walking,
 	prep,
-	attack
+	attack,
+	death
 }
 
 var direction = 1
@@ -19,6 +21,8 @@ var direction = 1
 var current_state: Spider_State = Spider_State.walking
 var new_state = current_state
 var at_edge = false  # To track if the spider is at the edge
+var health = FULL_HEALTH
+var damage = 0
 
 func _physics_process(delta):
 	if current_state == Spider_State.walking:
@@ -44,6 +48,12 @@ func _physics_process(delta):
 			velocity.x = SPEED * direction
 			move_and_slide()
 			check_for_wall()
+			
+	if health <= 0:
+		velocity.x = 0
+		current_state = Spider_State.death
+		animated_sprite_2d.play("death")
+		queue_free()
 
 # Function to check if the spider is near a wall
 func check_for_wall():
@@ -67,3 +77,18 @@ func is_player_in_attack_radius():
 		if body.name == "panda":
 			return true
 	return false
+	
+func take_damage(dmg: int):
+	health -= dmg
+	print(health)
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.name == "JabHitBox":
+		damage = 15
+	elif area.name == "AttackHitBox":
+		damage = 20
+	elif area.name == "SlamHitBox":
+		damage = 50
+	else:
+		return
+	take_damage(damage)

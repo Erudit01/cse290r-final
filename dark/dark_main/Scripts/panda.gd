@@ -27,6 +27,7 @@ const FULL_HEALTH = 100
 var body: CharacterBody2D = $"."
 @onready 
 var animate: AnimationPlayer = $Animations/AnimationPlayer
+@onready var enemy_collision: Area2D = $EnemyOverlap
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -141,6 +142,7 @@ func _physics_process(delta: float) -> void:
 			$AttackHitBox/AttackCollision1.position *= Vector2(-1,1)
 			$AttackHitBox/AttackCollision2.position *= Vector2(-1,1)
 			$PlayerHitBox.position *= Vector2(-1,1)
+			$EnemyOverlap/EnemyInArea.position *= Vector2(-1,1)
 		$Animations.flip_h = false
 	elif direction < 0 and movable == true:
 		if $Animations.flip_h == false:
@@ -151,6 +153,7 @@ func _physics_process(delta: float) -> void:
 			$AttackHitBox/AttackCollision1.position *= Vector2(-1,1)
 			$AttackHitBox/AttackCollision2.position *= Vector2(-1,1)
 			$PlayerHitBox.position *= Vector2(-1,1)
+			$EnemyOverlap/EnemyInArea.position *= Vector2(-1,1)
 		$Animations.flip_h = true
 	
 		#Apply movement
@@ -197,16 +200,24 @@ func _physics_process(delta: float) -> void:
 		
 	if health <= 0:
 		death = true
+		new_state = Player_State.Death
+		movable = false
+		queue_free()
 	
 	body.move_and_slide()
+	check_enemy_hit_player()
 	change_state(new_state)
 	
-
+	
 
 func take_damage(damage: int):
 	health -= damage
 	print(health)
 
+func check_enemy_hit_player():
+	for body in enemy_collision.get_overlapping_bodies():
+		if body.name == "spider":
+			take_damage(5)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Attack" or anim_name == "Jab" or anim_name == "Spin_Jump" or anim_name == "Slam":
@@ -216,3 +227,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	#GET RID OF THIS ONCE DEATH MECHANIC IS ACTIVE
 	if anim_name == "Death":
 		death = false
+		

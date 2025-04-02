@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cpy8bjc0i8a8n"]
+[gd_scene load_steps=35 format=3 uid="uid://cpy8bjc0i8a8n"]
 
 [ext_resource type="Script" path="res://dark_main/Scripts/spider.gd" id="1_igt1y"]
 [ext_resource type="Texture2D" uid="uid://b3gyakb8wjbvj" path="res://dark_main/Assets/Characters/Blinding Spider/blind attack 16x16.png" id="1_kti2t"]
@@ -205,7 +205,11 @@ fill_to = Vector2(0.822086, 0.291411)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qrwti"]
 radius = 27.074
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqgs3"]
+size = Vector2(18, 11)
+
 [node name="spider" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_igt1y")
 
 [node name="Health" type="Node" parent="."]
@@ -213,9 +217,7 @@ script = ExtResource("1_igt1y")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3, 4)
 sprite_frames = SubResource("SpriteFrames_6dqfx")
-animation = &"walk"
-frame = 5
-frame_progress = 1.0
+animation = &"death"
 offset = Vector2(3, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -246,5 +248,10 @@ shape = SubResource("CircleShape2D_qrwti")
 position = Vector2(0, 4)
 target_position = Vector2(3, 6)
 
-[connection signal="body_entered" from="attack_radius" to="." method="_on_attack_radius_body_entered"]
-[connection signal="body_exited" from="attack_radius" to="." method="_on_attack_radius_body_exited"]
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1, 2.5)
+shape = SubResource("RectangleShape2D_vqgs3")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_area_2d_area_entered"]
