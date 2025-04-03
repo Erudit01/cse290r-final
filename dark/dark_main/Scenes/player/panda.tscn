@@ -383,7 +383,7 @@ radius = 4.0
 height = 16.0
 
 [node name="panda" type="CharacterBody2D"]
-collision_mask = 8
+collision_mask = 10
 script = ExtResource("1_ajng7")
 
 [node name="Animations" type="Sprite2D" parent="."]
@@ -441,10 +441,12 @@ shape = SubResource("CircleShape2D_3n1ac")
 disabled = true
 
 [node name="PlayerHitBox" type="CollisionShape2D" parent="."]
+visibility_layer = 24
 position = Vector2(-7, -9)
 shape = SubResource("CapsuleShape2D_pienf")
 
 [node name="EnemyOverlap" type="Area2D" parent="."]
+collision_mask = 64
 
 [node name="EnemyInArea" type="CollisionShape2D" parent="EnemyOverlap"]
 position = Vector2(-7, -8)

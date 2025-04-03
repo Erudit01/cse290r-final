@@ -83,6 +83,8 @@ func take_damage(dmg: int):
 	print(health)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	print("run")
+	print(area.name)
 	if area.name == "JabHitBox":
 		damage = 15
 	elif area.name == "AttackHitBox":

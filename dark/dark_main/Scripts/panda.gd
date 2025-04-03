@@ -216,7 +216,7 @@ func take_damage(damage: int):
 
 func check_enemy_hit_player():
 	for body in enemy_collision.get_overlapping_bodies():
-		if body.name == "spider":
+		if body.name in ["spider","spider2","spider3","spider4","spider5","spider6","spider7","spider8","spider9"]:
 			take_damage(5)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -224,7 +224,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		attacking = false
 	if anim_name == "Roll":
 		roll = false
-	#GET RID OF THIS ONCE DEATH MECHANIC IS ACTIVE
-	if anim_name == "Death":
-		death = false
 		

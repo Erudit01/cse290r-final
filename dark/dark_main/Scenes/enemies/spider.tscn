@@ -209,7 +209,8 @@ radius = 27.074
 size = Vector2(18, 11)
 
 [node name="spider" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 66
+collision_mask = 5
 script = ExtResource("1_igt1y")
 
 [node name="Health" type="Node" parent="."]
@@ -239,6 +240,8 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_wj2pn")
 
 [node name="attack_radius" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
 
 [node name="attack_collision" type="CollisionShape2D" parent="attack_radius"]
 position = Vector2(-3, 4)
@@ -249,6 +252,7 @@ position = Vector2(0, 4)
 target_position = Vector2(3, 6)
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(1, 2.5)

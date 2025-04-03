@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2hj57760dils"]
+[gd_scene load_steps=15 format=3 uid="uid://kl3u31434aod"]
 
 [ext_resource type="Texture2D" uid="uid://d3q77nbag57dl" path="res://dark_main/Scenes/levels/Ancient Caves/Tileset and SpriteSheets/Tileset Add on3.png" id="1_ijtre"]
 [ext_resource type="Script" path="res://dark_main/Scripts/Menus/pause_menu_show.gd" id="1_ylw08"]
@@ -446,6 +446,7 @@ position = Vector2(277, 40)
 [node name="panda" parent="." instance=ExtResource("3_y2tv5")]
 z_index = 8
 position = Vector2(-113, -49)
+collision_layer = 16
 collision_mask = 9
 
 [node name="Camera2D" type="Camera2D" parent="panda"]
